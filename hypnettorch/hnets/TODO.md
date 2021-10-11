@@ -1,0 +1,7 @@
+# TODOs
+
+* **Migrate all hypernetworks into this folder and deprecate the old once that still reside in subpackages all over the repository**
+* The hypernetwork should know the main network for initializations not just its shapes
+* Implement a recurrent hypernetwork, that can produce a different set of weights per timestep for an arbitrary number of timesteps. Therefore, we have to be able to leave target shapes more flexible, since the number of weights to be produced will be determined at run time.
+* Previous hypernetwork implementations had options such as `noise_dim` and `temb_std` (see deprecated [HyperNetwork](toy_example/hyper_model/HyperNetwork.py)). We should add handy methods to the new interface that allow to append white noise to unconditional inputs (`noise_dim`) or add white noise to conditional embeddings (either for a set of given embeddings or a set of given embedding IDs).
+* Implement a recurrent hypernetwork, that can takeover the job of the chunked MLP hypernetwork [ChunkedHMLP](hnets/chunked_mlp_hnet.py) without the need of having chunk embeddings that increase the parameter count. It could also be used to produce a flexible number of outputs (for multiple architectures) or weights per timestep of a recurrent main network (such as the [SimpleRNN](mnets/simple_rnn.py)). Therefore, we should design dedicated recurrent layers (similar to [BatchNormLayer](utils/batchnorm_layer.py)), that can operate in both modes; compute only one timestep at a time or compute all timesteps at once.
