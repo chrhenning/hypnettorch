@@ -1,17 +1,61 @@
 # Hypernetworks for PyTorch
 
-This package combines utilities that make it easy to work with hypernetworks in [PyTorch](https://pytorch.org/).
+This package contains utilities that make it easy to work with [hypernetworks](https://arxiv.org/abs/1609.09106) in [PyTorch](https://pytorch.org/).
 
 ## Installation
 
-**TODO**
+You can either install the latest package version via
+
+```
+python3 -m pip install hypnettorch
+```
+
+or, you directly install the current sources
+
+```
+python3 -m pip install git+https://github.com/chrhenning/hypnettorch
+```
+
+### Installation for developers
+
+If you actively develop the package, it is easiest to install it in `development mode`, such that all changes that are done to source files are directly visible when you use the package.
+
+Clone the repository to a location of your choice
+
+```
+git clone https://github.com/chrhenning/hypnettorch.git
+```
+
+and move inside the cloned repo
+
+```
+cd ./hypnettorch
+```
+
+Now, you can simply **install** the package in `editable` mode, which will ensure that you can easily update the package sources (cf. [development mode](https://setuptools.readthedocs.io/en/latest/userguide/development_mode.html))
+
+```
+pip3 install --editable . --user
+```
+
+Since the package was installed in `editable` mode, you can always update the sources simply by pulling the most recent code
+
+```
+git pull
+```
+
+You can **uninstall** the package at any point by running `python3 setup.py develop -u`.
 
 ## Usage
+
+The basic functionalities of the package are quite intuitive and easy to use, e.g.,
 
 ```python
 from hypnettorch.mnets import MLP
 net = MLP()
 ```
+
+There are several [tutorial](https://github.com/chrhenning/hypnettorch/tree/master/hypnettorch/tutorials). Check out the [getting started](https://github.com/chrhenning/hypnettorch/blob/master/hypnettorch/tutorials/getting_started.ipynb) when working with ``hypnettorch`` for the first time.
 
 ## Documentation
 
