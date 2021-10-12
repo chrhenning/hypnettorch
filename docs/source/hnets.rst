@@ -1,3 +1,5 @@
+.. _hnets-reference-label:
+
 Hypernetworks
 *************
 

@@ -1,3 +1,5 @@
+.. _mnets-reference-label:
+
 Main Networks
 *************
 

@@ -14,12 +14,12 @@ import os
 import sys
 # Since this file is located inside `docs/source/`.
 sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../../hypnettorch'))
+#sys.path.insert(0, os.path.abspath('../../hypnettorch'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'Hypernet Algorithms'
+project = 'hypnettorch'
 copyright = '2021, Christian Henning, Maria R. Cervera'
 author = 'Christian Henning, Maria R. Cervera'
 
@@ -55,7 +55,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
