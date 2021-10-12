@@ -1,60 +1,14 @@
-alabaster==0.7.12
-Babel==2.8.0
-brotlipy==0.7.0
-certifi==2021.5.30
-cffi @ file:///tmp/build/80754af9/cffi_1600699146221/work
-chardet==3.0.4
-cryptography @ file:///tmp/build/80754af9/cryptography_1601046815590/work
-cycler==0.10.0
-docutils==0.16
-fonttools==4.25.0
-GPUtil==1.4.0
-idna @ file:///tmp/build/80754af9/idna_1593446292537/work
-imagesize==1.2.0
-Jinja2==2.11.2
-joblib @ file:///tmp/build/80754af9/joblib_1601912903842/work
-kiwisolver @ file:///tmp/build/80754af9/kiwisolver_1612282420641/work
-MarkupSafe==1.1.1
-matplotlib @ file:///tmp/build/80754af9/matplotlib-suite_1628003481308/work
-mkl-fft==1.3.0
-mkl-random @ file:///tmp/build/80754af9/mkl_random_1626186064646/work
-mkl-service==2.4.0
-munkres==1.1.4
-numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1626271506491/work
-nvidia-htop==1.0
-olefile @ file:///Users/ktietz/demo/mc3/conda-bld/olefile_1629805411829/work
-packaging==20.4
-pandas==1.2.5
-Pillow @ file:///tmp/build/80754af9/pillow_1625655817137/work
-protobuf==3.15.8
-pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
-Pygments @ file:///tmp/build/80754af9/pygments_1600458456400/work
-pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1594392929924/work
-pyparsing @ file:///home/linux1/recipes/ci/pyparsing_1610983426697/work
-PySocks==1.7.1
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
-pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1633452062248/work
-requests @ file:///tmp/build/80754af9/requests_1592841827918/work
-scikit-learn @ file:///tmp/build/80754af9/scikit-learn_1598376899566/work
-scipy @ file:///tmp/build/80754af9/scipy_1618855647378/work
-seaborn @ file:///tmp/build/80754af9/seaborn_1600553570093/work
-sip==4.19.13
-six @ file:///tmp/build/80754af9/six_1623709665295/work
-snowballstemmer==2.0.0
-Sphinx @ file:///tmp/build/80754af9/sphinx_1597428793432/work
-sphinx-rtd-theme @ file:///home/conda/feedstock_root/build_artifacts/sphinx_rtd_theme_1631863601352/work
-sphinxcontrib-applehelp==1.0.2
-sphinxcontrib-devhelp==1.0.2
-sphinxcontrib-htmlhelp==1.0.3
-sphinxcontrib-jsmath==1.0.1
-sphinxcontrib-qthelp==1.0.3
-sphinxcontrib-serializinghtml==1.1.4
-tensorboardX @ file:///home/conda/feedstock_root/build_artifacts/tensorboardx_1628560643999/work
-termcolor==1.1.0
-threadpoolctl @ file:///tmp/tmp9twdgx9k/threadpoolctl-2.1.0-py3-none-any.whl
-torch==1.9.1
-torchaudio==0.9.0a0+a85b239
-torchvision==0.10.1
-tornado @ file:///tmp/build/80754af9/tornado_1606942300299/work
-typing-extensions @ file:///tmp/build/80754af9/typing_extensions_1631814937681/work
-urllib3 @ file:///tmp/build/80754af9/urllib3_1603305693037/work
+torch
+numpy
+scipy
+torchvision
+pandas
+matplotlib
+packaging
+bsub
+conllu
+GPUtil
+Pillow
+scikit_learn
+tensorboardX
+tensorflow
