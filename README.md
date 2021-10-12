@@ -1,6 +1,6 @@
 # Hypernetworks for PyTorch
 
-This package contains utilities that make it easy to work with [hypernetworks](https://arxiv.org/abs/1609.09106) in [PyTorch](https://pytorch.org/).
+[This package](https://hypnettorch.readthedocs.io) contains utilities that make it easy to work with [hypernetworks](https://arxiv.org/abs/1609.09106) in [PyTorch](https://pytorch.org/).
 
 ## Installation
 
@@ -16,7 +16,7 @@ or, you directly install the current sources
 python3 -m pip install git+https://github.com/chrhenning/hypnettorch
 ```
 
-### Installation for developers
+#### Installation for developers
 
 If you actively develop the package, it is easiest to install it in `development mode`, such that all changes that are done to source files are directly visible when you use the package.
 
@@ -58,6 +58,10 @@ net = MLP()
 There are several [tutorials](https://github.com/chrhenning/hypnettorch/tree/master/hypnettorch/tutorials). Check out the [getting started](https://github.com/chrhenning/hypnettorch/blob/master/hypnettorch/tutorials/getting_started.ipynb) tutorial when working with ``hypnettorch`` for the first time.
 
 ## Documentation
+
+The documentation can be found [here](https://hypnettorch.readthedocs.io).
+
+#### Note for developers
 
 The documentation can be build using 
 
