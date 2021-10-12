@@ -23,11 +23,13 @@
 Hypernetwork Interface
 ----------------------
 
-The module :mod:`hnets.hnet_interface` contains an interface for hypernetworks.
+The module :mod:`hypnettorch.hnets.hnet_interface` contains an interface for
+hypernetworks.
 
 A hypernetworks is a special type of neural network that produces the weights of
 another neural network (called the main or target networks, see
-:mod:`mnets.mnet_interface`). The name "hypernetworks" was introduced in
+:mod:`hypnettorch.mnets.mnet_interface`). The name "hypernetworks" was
+introduced in
 
     `Ha et al., "Hypernetworks", 2016. <https://arxiv.org/abs/1609.09106>`
 
@@ -43,14 +45,7 @@ from warnings import warn
 from hypnettorch.mnets.mnet_interface import MainNetInterface
 
 class HyperNetInterface(MainNetInterface):
-    r"""A general interface for hypernetworks.
-
-    Note:
-        Previous implementations of hypernetworks used the deprecated interface
-        :mod:`utils.module_wrappers.CLHyperNetInterface`, which was specialized
-        for the design of task-conditioned hypernetworks. This new interface
-        is more general but includes all previous capabilities.
-    """
+    r"""A general interface for hypernetworks."""
     def __init__(self):
         super(HyperNetInterface, self).__init__()
 
@@ -177,7 +172,8 @@ class HyperNetInterface(MainNetInterface):
     def unconditional_params_ref(self):
         """A list of integers that has the same length as
         :attr:`unconditional_params`. Each entry represents an index within
-        attribute :attr:`mnets.mnet_interface.MainNetInterface.internal_params`.
+        attribute :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+internal_params`.
 
         If :attr:`unconditional_params` is ``None``, the this attribute is
         ``None`` as well.
@@ -195,9 +191,10 @@ class HyperNetInterface(MainNetInterface):
             This attribute has different semantics compared to
             :attr:`unconditional_param_shapes_ref` which points to locations
             within
-            :attr:`mnets.mnet_interface.MainNetInterface.param_shapes`,
-            wheras this attribute points to locations within
-            :attr:`mnets.mnet_interface.MainNetInterface.internal_params`.
+            :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+param_shapes`, wheras this attribute points to locations within
+            :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+internal_params`.
 
         :type: list or None
         """
@@ -208,7 +205,8 @@ class HyperNetInterface(MainNetInterface):
         """A list of lists of integers denoting the shape of every parameter
         tensor belonging to the `unconditional` parameters associated with this
         hypernetwork. Note, the returned list is a subset of the shapes
-        maintained in :attr:`mnets.mnet_interface.MainNetInterface.param_shapes`
+        maintained in
+        :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.param_shapes`
         and is independent whether these parameters are internally maintained
         (i.e., occuring within :attr:`unconditional_params`).
 
@@ -224,7 +222,7 @@ class HyperNetInterface(MainNetInterface):
         """A list of integers that has the same length as
         :attr:`unconditional_param_shapes`. Each entry represents an index
         within attribute
-        :attr:`mnets.mnet_interface.MainNetInterface.param_shapes`.
+        :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.param_shapes`.
 
         :type: list
         """
@@ -290,8 +288,8 @@ class HyperNetInterface(MainNetInterface):
         hypernetwork (i.e., the complement of those returned by
         :attr:`unconditional_param_shapes`). Note, the returned list is a subset
         of the shapes maintained in
-        :attr:`mnets.mnet_interface.MainNetInterface.param_shapes` and is
-        independent whether these parameters are internally maintained
+        :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.param_shapes`
+        and is independent whether these parameters are internally maintained
         (i.e., occuring within :attr:`conditional_params`).
 
         :type: list
@@ -305,11 +303,13 @@ class HyperNetInterface(MainNetInterface):
     def conditional_param_shapes_ref(self):
         """A list of integers that has the same length as
         :attr:`conditional_param_shapes`. Each entry represents an index within
-        attribute :attr:`mnets.mnet_interface.MainNetInterface.param_shapes`.
+        attribute
+        :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.param_shapes`.
 
         It can be used to gain access to meta information about conditional
         parameters via attribute
-        :attr:`mnets.mnet_interface.MainNetInterface.param_shapes_meta`.
+        :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+param_shapes_meta`.
 
         :type: list
         """
@@ -414,18 +414,21 @@ class HyperNetInterface(MainNetInterface):
                 internally maintained, then this argument is non-optional.
 
                 If a ``list`` is provided, then it either has to match the
-                length of :attr:`mnets.mnet_interface.MainNetInterface.\
-hyper_shapes_learned` (if specified) or the length of attribute
-                :attr:`mnets.mnet_interface.MainNetInterface.param_shapes`.
+                length of :attr:`hypnettorch.mnets.mnet_interface.\
+MainNetInterface.hyper_shapes_learned` (if specified) or the length of attribute
+                :attr:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+param_shapes`.
 
                 If a ``dict`` is provided, it must have at least one of the
                 following keys specified:
                 - ``'uncond_weights'`` (list): Contains unconditional weights.
                 - ``'cond_weights'`` (list): Contains conditional weights.
             distilled_params (optional): See docstring of method
-                :meth:`mnets.mnet_interface.MainNetInterface.forward`.
+                :meth:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+forward`.
             condition (optional): See docstring of method
-                :meth:`mnets.mnet_interface.MainNetInterface.forward`.
+                :meth:`hypnettorch.mnets.mnet_interface.MainNetInterface.\
+forward`.
             ret_format (str): The format in which the generated weights are
                 returned. The following options are available.
 

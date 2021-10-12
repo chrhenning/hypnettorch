@@ -6,7 +6,7 @@ Main Networks
 .. contents::
     
 .. note::
-    All main networks should inherit from the abstract class :class:`mnets.mnet_interface.MainNetInterface` to provide a consistent interface for users.
+    All main networks should inherit from the abstract class :class:`hypnettorch.mnets.mnet_interface.MainNetInterface` to provide a consistent interface for users.
 
 .. automodule:: hypnettorch.mnets.bi_rnn
     :members:

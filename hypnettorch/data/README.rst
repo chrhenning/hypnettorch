@@ -6,7 +6,7 @@ Datasets
 
 This folder contains data loaders for common datasets. Note, the code in this folder is a derivative of the dataloaders developed in `this <https://github.com/chrhenning/ann_implementations/tree/master/src/data>`__ repo. For examples on how to use these data loaders with Tensorflow checkout the `original code <https://github.com/chrhenning/ann_implementations>`__.
 
-All dataloaders are derived from the abstract base class :class:`data.dataset.Dataset` to provide a common API to the user.
+All dataloaders are derived from the abstract base class :class:`hypnettorch.data.dataset.Dataset` to provide a common API to the user.
 
 Preparation of datasets
 =======================

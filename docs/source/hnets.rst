@@ -5,10 +5,10 @@ Hypernetworks
 
 .. contents::
 
-A `hypernetwork <https://arxiv.org/abs/1609.09106>`__ is a neural network that produces the weights of another network. As such, it can be seen as a specific type of main network (aka neural network). Therefore, each hypernetwork has a specific interface :class:`hnets.hnet_interface.HyperNetInterface` which is derived from the main network interface :class:`mnets.mnet_interface.MainNetInterface`. 
+A `hypernetwork <https://arxiv.org/abs/1609.09106>`__ is a neural network that produces the weights of another network. As such, it can be seen as a specific type of main network (aka neural network). Therefore, each hypernetwork has a specific interface :class:`hypnettorch.hnets.hnet_interface.HyperNetInterface` which is derived from the main network interface :class:`hypnettorch.mnets.mnet_interface.MainNetInterface`. 
 
 .. note::
-    All hypernetworks in this subpackage implement the abstract interface :class:`hnets.hnet_interface.HyperNetInterface` to provide a consistent interface for users.
+    All hypernetworks in this subpackage implement the abstract interface :class:`hypnettorch.hnets.hnet_interface.HyperNetInterface` to provide a consistent interface for users.
 
 .. automodule:: hypnettorch.hnets.hnet_interface
     :members:

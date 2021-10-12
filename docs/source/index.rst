@@ -18,6 +18,14 @@
 
 This package provides functionalities to easily work with hypernetworks in PyTorch. A hypernetwork :math:`h(\mathbf{e}, \theta)` is a neural network with parameters :math:`\theta` that generates the parameters :math:`\omega` of another neural network :math:`f(\mathbf{x}, \omega)`, called *main network*. These two network types require specialized implementations. For instance, a *main network* must have the ability to receive its own weights :math:`\omega` as additional input to the ``forward`` method (see subpackage :ref:`mnets <mnets-reference-label>`). A collection of different hypernetwork implementations can be found in subpackage :ref:`hnets <hnets-reference-label>`.
 
+Installation
+------------
+
+See `here <https://github.com/chrhenning/hypnettorch#installation>`__.
+
+Usage
+-----
+
 Check out the `tutorials <https://github.com/chrhenning/hypnettorch/tree/master/hypnettorch/tutorials>`__, especially the `getting started <https://github.com/chrhenning/hypnettorch/blob/master/hypnettorch/tutorials/getting_started.ipynb>`__ tutorial.
 
 Indices and tables
