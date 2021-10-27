@@ -22,7 +22,7 @@ General note on execution
 
 Currently, there is kind of a contradiction regarding the execution path that we solved in a very unelegant way. The module :mod:`hpsearch.hpsearch` resides in subpackage ``hpsearch`` and is expected to be executed either from within this subpackage or from the root package. On the other hand, the simulation that should be hpsearched might be in a complete different directory and it might be desired to execute the runs from within this simulation directory. Therefore, when we start the hpsearch we have to pass argument ``--run_cwd``, which has to be the working directory of the simulation.
 
-**Example 1:** Assume you are in the simulation directory ``sims/my_sim`` and want to start the hpsearch from there. One option is to temporarily switch to the subpackage ``hpsearch`` and to switch back ones the hpsearch ended:
+**Example 1:** Assume you are in the simulation directory ``sims/my_sim`` and want to start the hpsearch from there. One option is to temporarily switch to the subpackage ``hpsearch`` and to switch back once the hpsearch ended:
 
 .. code-block:: console
 
