@@ -40,7 +40,8 @@ class ToyRegression(Dataset):
     """An instance of this class shall represent a simple regression task."""
     def __init__(self, train_inter=[-10, 10], num_train=20,
                  test_inter=[-10, 10], num_test=80, val_inter=None,
-                 num_val=None, map_function=lambda x : x, std=0, rseed=None):
+                 num_val=None, map_function=lambda x : x, std=0.,
+                 perturb_test_val=False, rseed=None):
         """Generate a new dataset.
 
         The input data x will be uniformly drawn for train samples and
@@ -48,26 +49,36 @@ class ToyRegression(Dataset):
         will map this random input data onto output samples y.
 
         Args:
-            train_inter: A tuple, representing the interval from which x
-                samples are drawn in the training set.
+            train_inter (tuple or list): A tuple, representing the interval from
+                which x samples are drawn in the training set.
 
                 ``train_inter`` may also be provided as a list of tuples, in
                 which case training samples will be distributed according to
                 the range covered by each tuple.
-            num_train: Number of training samples.
-            test_inter: A tuple, representing the interval from which x
+            num_train (int): Number of training samples.
+            test_inter (tuple): A tuple, representing the interval from which x
                 samples are drawn in the test set.
-            num_test: Number of test samples.
-            val_inter (optional): See parameter `test_inter`. If set, this
-                argument leads to the construction of a validation set. Note,
-                option `num_val` need to be specified as well.
-            num_val (optional): Number of validation samples.
-            map_function: A function handle that receives input
+            num_test (int): Number of test samples.
+            val_inter (tuple, optional): See parameter `test_inter`. If set,
+                this argument leads to the construction of a validation set.
+                Note, option ``num_val`` need to be specified as well.
+            num_val (int, optional): Number of validation samples.
+            map_function (func): A function handle that receives input
                 samples and maps them to output samples.
-            std: If not zero, Gaussian white noise with this std will be added
-                to the training outputs.
-            rseed: If ``None``, the current random state of numpy is used to
-                   generate the data. Otherwise, a new random state with the
+            std (float or func): If not zero, Gaussian white noise with this std
+                will be added to the training outputs.
+
+                Heteroscedasticity can be realized by passing a function
+                :math:`\sigma(x)` that describes the standard deviations at a
+                given location :math:`x`. Note, this function may only outputs
+                numbers :math:`\geq 0`.
+            perturb_test_val (bool): By default, the option ``std`` only
+                adds noise to the training data, not the validation or test
+                data. If this option is ``True``, then also the validation
+                and test targets will be perturbed. This might be helpful for
+                measuring calibration.
+            rseed (int): If ``None``, the current random state of numpy is used
+                   to generate the data. Otherwise, a new random state with the
                    given seed is generated.
         """
         super().__init__()
@@ -117,16 +128,32 @@ class ToyRegression(Dataset):
         train_y = map_function(train_x)
         test_y = map_function(test_x)
 
-        # Perturb training outputs.
-        if std > 0:
-            train_eps = rand.normal(loc=0.0, scale=std, size=(num_train, 1))
-            train_y += train_eps
+        def target_perturbation(inputs, targets):
+            """Perturb the targets using ``std``."""
+            num_inputs = inputs.shape[0]
+            # Perturb training outputs.
+            if isinstance(std, (int, float)):
+                if std > 0:
+                    trgt_eps = rand.normal(loc=0.0, scale=std,
+                                           size=(num_inputs, 1))
+                    targets += trgt_eps
+            else:
+                stds = std(inputs)
+                trgt_eps = rand.normal(loc=0.0, scale=stds,
+                                       size=(num_inputs, 1))
+                targets += trgt_eps
+
+        target_perturbation(train_x, train_y)
+        if perturb_test_val:
+            target_perturbation(test_x, test_y)
 
         # Create validation data if requested.
         if num_val is not None:
             val_x = np.linspace(start=val_inter[0], stop=val_inter[1],
                                 num=num_val).reshape((num_val, 1))
             val_y = map_function(val_x)
+            if perturb_test_val:
+                target_perturbation(val_x, val_y)
 
             in_data = np.vstack([train_x, test_x, val_x])
             out_data = np.vstack([train_y, test_y, val_y])
