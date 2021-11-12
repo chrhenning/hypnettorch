@@ -117,7 +117,7 @@ class ToyRegression(Dataset):
         assert np.sum(num_per_inter) == num_train
 
         train_x = np.vstack( \
-            [np.random.uniform(low=t[0], high=t[1],
+            [rand.uniform(low=t[0], high=t[1],
                                size=(int(num_per_inter[i]), 1)) \
              for i, t in enumerate(train_inter)])
 
