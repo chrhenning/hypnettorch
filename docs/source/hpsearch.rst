@@ -1,3 +1,5 @@
+.. _hpsearch-reference-label:
+
 Hyperparameter Searches
 ***********************
 

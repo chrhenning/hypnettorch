@@ -778,7 +778,8 @@ def miscellaneous_args(parser, big_data=True, synthetic_data=False,
     return agroup
 
 def eval_args(parser, dval_iter=500, show_val_batch_size=False,
-              dval_batch_size=256, show_val_set_size=False, dval_set_size=0):
+              dval_batch_size=256, show_val_set_size=False, dval_set_size=0,
+              show_test_with_val_set=False):
     """This is a helper method of the method `parse_cmd_arguments` to add
     an argument group for validation and testing options.
 
@@ -786,6 +787,7 @@ def eval_args(parser, dval_iter=500, show_val_batch_size=False,
         - `val_iter`
         - `val_batch_size`
         - `val_set_size`
+        - `test_with_val_set`
 
     Args:
         parser: Object of class :class:`argparse.ArgumentParser`.
@@ -796,6 +798,8 @@ def eval_args(parser, dval_iter=500, show_val_batch_size=False,
         show_val_set_size (bool): Whether the `val_set_size` argument should be
             shown.
         dval_set_size (int): Default value of argument `val_set_size`.
+        show_test_with_val_set (bool): Whether the `test_with_val_set` argument
+            should be shown.
 
     Returns:
         The created argument group, in case more options should be added.
@@ -827,6 +831,12 @@ def eval_args(parser, dval_iter=500, show_val_batch_size=False,
                                  'It is also desirable to select ' +
                                  'hyperparameters based on a validation set, ' +
                                  'if possible. Default: %(default)s.')
+
+    if show_test_with_val_set:
+        agroup.add_argument('--test_with_val_set', action='store_true',
+                            help='Perform the testing with the validation ' +
+                                 'set rather than the actual test set. This ' +
+                                 'might be useful for hyperparameter scanning.')
 
     return agroup
 
@@ -941,7 +951,8 @@ def cl_args(parser, show_beta=True, dbeta=0.01, show_from_scratch=False,
             show_multi_head=False, show_cl_scenario=False,
             show_split_head_cl3=True, dcl_scenario=1,
             show_num_tasks=False, dnum_tasks=1, show_num_classes_per_task=False,
-            dnum_classes_per_task=2):
+            dnum_classes_per_task=2, show_calc_hnet_reg_targets_online=False,
+            show_hnet_reg_batch_size=False, dhnet_reg_batch_size=-1):
     """This is a helper method of the method `parse_cmd_arguments` to add
     an argument group for typical continual learning arguments.
 
@@ -953,6 +964,8 @@ def cl_args(parser, show_beta=True, dbeta=0.01, show_from_scratch=False,
         - `split_head_cl3`
         - `num_tasks`
         - `num_classes_per_task`
+        - `calc_hnet_reg_targets_online`
+        - `hnet_reg_batch_size`
 
     Args:
         parser: Object of class :class:`argparse.ArgumentParser`.
@@ -969,6 +982,12 @@ def cl_args(parser, show_beta=True, dbeta=0.01, show_from_scratch=False,
         show_num_classes_per_task: Whether option `show_num_classes_per_task`
             should be shown.
         dnum_classes_per_task: Default value of option `dnum_classes_per_task`.
+        show_calc_hnet_reg_targets_online (bool): Whether the option
+            `calc_hnet_reg_targets_online` should be provided.
+        show_hnet_reg_batch_size (bool): Whether the option
+            `hnet_reg_batch_size` should be provided.
+        dhnet_reg_batch_size (int): Default value of option
+            `hnet_reg_batch_size`.
 
     Returns:
         The created argument group, in case more options should be added.
@@ -978,7 +997,7 @@ def cl_args(parser, show_beta=True, dbeta=0.01, show_from_scratch=False,
 
     if show_beta:
         agroup.add_argument('--beta', type=float, default=dbeta,
-                            help='Trade-off for the CL regularizer. ' +
+                            help='CL regularization strength. ' +
                                  'Default: %(default)s.')
 
     if show_from_scratch:
@@ -1024,6 +1043,35 @@ def cl_args(parser, show_beta=True, dbeta=0.01, show_from_scratch=False,
                             default=dnum_classes_per_task,
                             help='Number of classes per task. ' +
                                  'Default: %(default)s.')
+
+    if show_calc_hnet_reg_targets_online:
+        agroup.add_argument('--calc_hnet_reg_targets_online',
+                            action='store_true',
+                            help='For our hypernet CL regularizer, this ' +
+                                 'option will ensure that the targets are ' +
+                                 'computed on the fly, using the hypernet ' +
+                                 'weights acquired after learning the ' +
+                                 'previous task. Note, this option ensures ' +
+                                 'that there is almost no memory grow with ' +
+                                 'an increasing number of tasks (except ' +
+                                 'from an increasing number of task ' +
+                                 'embeddings). If this option is ' +
+                                 'deactivated, the more computationally ' +
+                                 'efficient way is chosen of computing all ' +
+                                 'main network weight targets (from all ' +
+                                 'previous tasks) once before learning a new ' +
+                                 'task.')
+    if show_hnet_reg_batch_size:
+        agroup.add_argument('--hnet_reg_batch_size', type=int,
+                            default=dhnet_reg_batch_size, metavar='N',
+                            help='If not "-1", then this number will ' +
+                                 'determine the maximum number of previous ' +
+                                 'tasks that are are considered when ' +
+                                 'computing the regularizer. Hence, if the ' +
+                                 'number of previous tasks is greater than ' +
+                                 'this number, then the regularizer will be ' +
+                                 'computed only over a random subset of ' +
+                                 'previous tasks. Default: %(default)s.')
 
     return agroup
 
