@@ -63,6 +63,8 @@ mnet.forward(inputs, weights=weights) # Compute predictions using the generated 
 
 There are several [tutorials](https://github.com/chrhenning/hypnettorch/tree/master/hypnettorch/tutorials). Check out the [getting started](https://github.com/chrhenning/hypnettorch/blob/master/hypnettorch/tutorials/getting_started.ipynb) tutorial when working with ``hypnettorch`` for the first time.
 
+You may also checkout the [examples](https://hypnettorch.readthedocs.io/en/latest/examples.html). For instance, how to use hypernetworks for continual learning.
+
 ## Documentation
 
 The documentation can be found [here](https://hypnettorch.readthedocs.io).
