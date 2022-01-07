@@ -24,7 +24,7 @@ Hyperparameter Search - Postprocessing
 --------------------------------------
 
 A postprocessing for a hyperparameter search that has been executed via the
-script :mod:`hpsearch.hpsearch`.
+script :mod:`hypnettorch.hpsearch.hpsearch`.
 """
 import argparse
 from datetime import datetime

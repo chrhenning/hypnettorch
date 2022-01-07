@@ -30,8 +30,9 @@ The configuration can either be provided directly, or the path to a simulation
 output folder or hyperparameter search output folder is provided. A simulation
 output folder is recognized by the file ``config.pickle`` which contains the
 `configuration`, i.e., all command-line arguments (cf. function
-:func:`sim_utils.setup_environment`). If a hyperparameter search output folder
-(cf. :mod:`hpsearch.hpsearch`) is provided, the best run will be selected.
+:func:`hypnettorch.sim_utils.setup_environment`). If a hyperparameter search
+output folder (cf. :mod:`hypnettorch.hpsearch.hpsearch`) is provided, the best
+run will be selected.
 
 **Example 1:** Assume you are in the simulation directory ``sims/my_sim`` and
 want to start the random seed gathering from there for a simulation in folder
@@ -59,7 +60,7 @@ gather_random_seeds.py --grid_module=sims.my_sim.hpsearch_config \
 --config_name=example_run_seed_gathering --run_cwd=$TMP_CUR_DIR && popd
 
 **Example 3:** An example instantiation of this script can be found in module
-:mod:`probabilistic.regression.gather_seeds_bbb`.
+`probabilistic.regression.gather_seeds_bbb <https://git.io/J9quN>`__.
 """
 import argparse
 from argparse import Namespace

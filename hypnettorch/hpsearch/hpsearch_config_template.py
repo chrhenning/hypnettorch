@@ -32,9 +32,9 @@ Hyperparameter Search Configuration File
 actual source file.**
 
 A configuration file for our custom hyperparameter search script
-:mod:`hpsearch.hpsearch`. To setup a configuration file for your simulation,
-simply create a copy of this template and follow the instructions in this file
-to fill all defined attributes.
+:mod:`hypnettorch.hpsearch.hpsearch`. To setup a configuration file for your
+simulation, simply create a copy of this template and follow the instructions in
+this file to fill all defined attributes.
 
 Once the configuration is setup for your simulation, you simply need to modify
 the fields :attr:`grid` and :attr:`conditions` to prepare a new grid search.
@@ -173,10 +173,10 @@ _OUT_ARG = 'out_dir'
 
 def _get_performance_summary(out_dir, cmd_ident):
     """See docstring of method
-    :func:`hpsearch.hpsearch._get_performance_summary`.
+    :func:`hypnettorch.hpsearch.hpsearch._get_performance_summary`.
 
     You only need to implement this function, if the default parser in module
-    :func:`hpsearch.hpsearch` is not sufficient for your purposes.
+    :func:`hypnettorch.hpsearch.hpsearch` is not sufficient for your purposes.
 
     In case you would like to use a custom parser, you have to set the
     attribute :attr:`_SUMMARY_PARSER_HANDLER` correctly.
@@ -201,7 +201,7 @@ def _performance_criteria(summary_dict, performance_criteria):
             :attr:`_SUMMARY_PARSER_HANDLE`.
         performance_criteria (float): The performance criteria. E.g., see
             command-line option `performance_criteria` of script
-            :mod:`hpsearch.hpsearch_postprocessing`.
+            :mod:`hypnettorch.hpsearch.hpsearch_postprocessing`.
 
     Returns:
         bool: If :code:`True`, the result folder will be kept as the performance

@@ -810,7 +810,7 @@ def _read_config(config_mod, require_perf_eval_handle=False,
 
     Args:
         config_mod: The implemented configuration template
-            :mod:`hpsearch.hpsearch_postprocessing`.
+            :mod:`hypnettorch.hpsearch.hpsearch_postprocessing`.
         require_perf_eval_handle: Whether :attr:`_PERFORMANCE_EVAL_HANDLE` has
             to be specified in the config file.
         require_argparse_handle: Whether :attr:`_ARGPARSE_HANDLE` has to be

@@ -9,18 +9,18 @@ A general framework to perform hyperparameter searches on single- and multi-GPU 
 How to run a hyperparameter search
 ----------------------------------
 
-The main script in this package is :mod:`hpsearch.hpsearch`.
+The main script in this package is :mod:`hypnettorch.hpsearch.hpsearch`.
 
 .. code-block:: console
 
    $ python3 -m hypnettorch.hpsearch.hpsearch --help
 
-Though, before being able to run a hyperparameter search, the search grid has to be configured. Therefore, your simulation has its own implementation of the configuration file :mod:`hpsearch.hpsearch_config_template`. Please refer to the corresponding documentation to obtain information on how to configure a hyperparameter search.
+Though, before being able to run a hyperparameter search, the search grid has to be configured. Therefore, your simulation has its own implementation of the configuration file :mod:`hypnettorch.hpsearch.hpsearch_config_template`. Please refer to the corresponding documentation to obtain information on how to configure a hyperparameter search.
 
 General note on execution
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Currently, there is kind of a contradiction regarding the execution path that we solved in a very unelegant way. The module :mod:`hpsearch.hpsearch` resides in subpackage ``hpsearch`` and is expected to be executed either from within this subpackage or from the root package. On the other hand, the simulation that should be hpsearched might be in a complete different directory and it might be desired to execute the runs from within this simulation directory. Therefore, when we start the hpsearch we have to pass argument ``--run_cwd``, which has to be the working directory of the simulation.
+Currently, there is kind of a contradiction regarding the execution path that we solved in a very unelegant way. The module :mod:`hypnettorch.hpsearch.hpsearch` resides in subpackage ``hpsearch`` and is expected to be executed either from within this subpackage or from the root package. On the other hand, the simulation that should be hpsearched might be in a complete different directory and it might be desired to execute the runs from within this simulation directory. Therefore, when we start the hpsearch we have to pass argument ``--run_cwd``, which has to be the working directory of the simulation.
 
 **Example 1:** Assume you are in the simulation directory ``sims/my_sim`` and want to start the hpsearch from there. One option is to temporarily switch to the subpackage ``hpsearch`` and to switch back once the hpsearch ended:
 
@@ -132,7 +132,7 @@ Note, in this case, you request the ressources required for your jobs for the hp
 Postprocessing
 --------------
 
-The post processing script :mod:`hpsearch.hpsearch_postprocessing` is currently very rudimentary. Its most important task is to make sure that the results of all completed runs are listed in a CSV file (note, that the hpsearch might be killed prematurely while some jobs are still running).
+The post processing script :mod:`hypnettorch.hpsearch.hpsearch_postprocessing` is currently very rudimentary. Its most important task is to make sure that the results of all completed runs are listed in a CSV file (note, that the hpsearch might be killed prematurely while some jobs are still running).
 
 Please checkout
 
@@ -143,8 +143,6 @@ Please checkout
 How to use this framework with your simulation
 ----------------------------------------------
 
-**This section is only for developers.**
+In order to utilize the scripts in this subpackage, you have to create a copy of the template :mod:`hypnettorch.hpsearch.hpsearch_config_template` and fill the template with content as described inside the module. For instance, see `probabilistic.prob_mnist.hpsearch_config_split_bbb <https://github.com/chrhenning/posterior_replay_cl/blob/master/probabilistic/prob_mnist/hpsearch_config_split_bbb.py>`__ as an example.
 
-In order to utilize the scripts in this subpackage, you have to create a copy of the template :mod:`hpsearch.hpsearch_config_template` and fill the template with content as described inside the module. For instance, see :mod:`probabilistic.prob_mnist_alt.hpsearch_config_split` as an example.
-
-Additionally, you need to make sure that your simulation has a command-line option like `out_dir` (that specifies the output directory) and that your simulation writes a performance summary file, that can be used to evaluate simulations.
+Additionally, you need to make sure that your simulation has a command-line option like ``--out_dir`` (that specifies the output directory) and that your simulation writes a performance summary file, that can be used to evaluate simulations.
