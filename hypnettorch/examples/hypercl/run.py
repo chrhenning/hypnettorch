@@ -416,7 +416,11 @@ def run():
                              'PermutedMNIST!')
 
     if config.batchnorm:
-        # TODO
+        # It's not complicated to realize, but one has to handle the batchnorm
+        # statistics properly, e.g., by telling the main net at each forward
+        # pass which ones to use: https://git.io/J9LRv
+        # and by checkpointing the stats when training of a task is finished:
+        # https://git.io/J9LRm
         raise NotImplementedError('Use of batchnorm not implemented yet!')
 
     ##############################################
