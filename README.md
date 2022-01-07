@@ -51,8 +51,14 @@ You can **uninstall** the package at any point by running `python3 setup.py deve
 The basic functionalities of the package are quite intuitive and easy to use, e.g.,
 
 ```python
+import torch
 from hypnettorch.mnets import MLP
-net = MLP()
+from hypnettorch.hnets import HMLP
+mnet = MLP(n_in=8, no_weights=True)
+hnet = HMLP(mnet.param_shapes)
+weights = hnet.forward(cond_id=0)
+inputs = torch.rand(32, 8)
+mnet.forward(inputs, weights=weights)
 ```
 
 There are several [tutorials](https://github.com/chrhenning/hypnettorch/tree/master/hypnettorch/tutorials). Check out the [getting started](https://github.com/chrhenning/hypnettorch/blob/master/hypnettorch/tutorials/getting_started.ipynb) tutorial when working with ``hypnettorch`` for the first time.
@@ -98,7 +104,7 @@ url={https://arxiv.org/abs/1906.00695}
 ```
 @inproceedings{posterior:replay:2021:henning:cervera,
 title={Posterior Meta-Replay for Continual Learning}, 
-      author={Christian Henning and Maria R. Cervera and Francesco D'Angelo and Johannes von Oswald and Regina Traber and Benjamin Ehret and Seijin Kobayashi and João Sacramento and Benjamin F. Grewe},
+      author={Christian Henning and Maria R. Cervera and Francesco D'Angelo and Johannes von Oswald and Regina Traber and Benjamin Ehret and Seijin Kobayashi and Benjamin F. Grewe and João Sacramento},
 booktitle={Conference on Neural Information Processing Systems},
 year={2021},
 url={https://arxiv.org/abs/2103.01133}
