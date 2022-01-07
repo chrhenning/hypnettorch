@@ -54,11 +54,11 @@ The basic functionalities of the package are quite intuitive and easy to use, e.
 import torch
 from hypnettorch.mnets import MLP
 from hypnettorch.hnets import HMLP
-mnet = MLP(n_in=8, no_weights=True)
-hnet = HMLP(mnet.param_shapes)
-weights = hnet.forward(cond_id=0)
-inputs = torch.rand(32, 8)
-mnet.forward(inputs, weights=weights)
+mnet = MLP(n_in=8, n_out=1, no_weights=True) # Create MLP with 8 inputs and 1 output.
+hnet = HMLP(mnet.param_shapes) # Create hypernetwork for the above MLP.
+weights = hnet.forward(cond_id=0) # Generate the weights of network `mnet`.
+inputs = torch.rand(32, 8) # Random inputs.
+mnet.forward(inputs, weights=weights) # Compute predictions using the generated weights.
 ```
 
 There are several [tutorials](https://github.com/chrhenning/hypnettorch/tree/master/hypnettorch/tutorials). Check out the [getting started](https://github.com/chrhenning/hypnettorch/blob/master/hypnettorch/tutorials/getting_started.ipynb) tutorial when working with ``hypnettorch`` for the first time.
