@@ -32,7 +32,7 @@ Here is an example on how to start an hyperparameter search on a cluster using
 
    $ bsub -n 1 -W 48:00 -e hpsearch.err -o hpsearch.out \\
      -R "rusage[mem=8000]" \\
-     python3 hpsearch.py --run_cluster --num_jobs=20
+     python -m hypnettorch.hpsearch.hpsearch --run_cluster --num_jobs=20
 
 For more demanding jobs (e.g., ImageNet), one may request more resources:
 
@@ -40,8 +40,8 @@ For more demanding jobs (e.g., ImageNet), one may request more resources:
 
    $ bsub -n 1 -W 96:00 -e hpsearch.err -o hpsearch.out \\
      -R "rusage[mem=16000]" \\
-     python3 hpsearch.py --run_cluster --num_jobs=20 --num_hours=48 \\
-     --resources="\"rusage[mem=8000, ngpus_excl_p=1]\""
+     python -m hypnettorch.hpsearch.hpsearch --run_cluster --num_jobs=20 \\
+     --num_hours=48 --resources="\\"rusage[mem=8000, ngpus_excl_p=1]\\""
 
 Please fill in the grid parameters in the corresponding config file (see
 command line argument `grid_module`).
@@ -861,6 +861,7 @@ def _read_config(config_mod, require_perf_eval_handle=False,
         globals()['_ARGPARSE_HANDLE'] = config_mod._ARGPARSE_HANDLE
 
 def hpsearch_cli_arguments(parser, show_num_searches=True, show_out_dir=True,
+                           dout_dir='./out/hyperparam_search',
                            show_grid_module=True):
     """The CLI arguments of the hpsearch."""
     parser.add_argument('--deterministic_search', action='store_true',
@@ -872,8 +873,7 @@ def hpsearch_cli_arguments(parser, show_num_searches=True, show_out_dir=True,
                                  'configurations that should be tested ' +
                                  'maximally. Default: %(default)s.')
     if show_out_dir:
-        parser.add_argument('--out_dir', type=str,
-                            default='./out/hyperparam_search',
+        parser.add_argument('--out_dir', type=str, default=dout_dir,
                             help='Where should all the output files be ' +
                                  'written to? Note, a timestep is added to ' +
                                  'this path, except "force_out_dir" is set. ' +
@@ -1011,14 +1011,29 @@ def hpsearch_cli_arguments(parser, show_num_searches=True, show_out_dir=True,
     parser.add_argument('--random_seed', type=int, metavar='N', default=42,
                         help='Random seed. Default: %(default)s.')
 
-if __name__ == '__main__':
+def run(argv=None, dout_dir='./out/hyperparam_search'):
+    """Run the hyperparameter search script.
+
+    Args:
+        argv (list, optional): If provided, it will be treated as a list of
+            command-line argument that is passed to the parser in place of
+            :code:`sys.argv`.
+        dout_dir (str, optional): The default value of command-line option
+            ``--out_dir``.
+
+    Returns:
+        (str): The path to the CSV file containing the results of this search.
+    """
     parser = argparse.ArgumentParser(description= \
         'hpsearch - Automatic Parameter Search -- ' +
         'Note, that the search values are defined in the source code of the ' +
         'accompanied configuration file!')
-    hpsearch_cli_arguments(parser)
+    hpsearch_cli_arguments(parser, dout_dir=dout_dir)
     # TODO build in "continue" option to finish incomplete commands.
-    args = parser.parse_args()
+    args = None
+    if argv is not None:
+        args = argv
+    args = parser.parse_args(args=args)
 
     random.seed(args.random_seed)
     np.random.seed(args.random_seed)
@@ -1119,7 +1134,7 @@ if __name__ == '__main__':
     conditions = []
     for i, cond in enumerate(orig_conditions):
         assert len(cond) == 2 and isinstance(cond[0], dict) \
-               and isinstance(cond[0], dict)
+               and isinstance(cond[1], dict)
         valid = True
         for k in cond[0].keys():
             if k not in grid.keys():
@@ -1262,3 +1277,8 @@ if __name__ == '__main__':
         warnings.warn('No results have been gathered during this hpsearch.')
 
     print('### Running Hyperparameter Search ... Done')
+
+    return results_file
+
+if __name__ == '__main__':
+    run()
