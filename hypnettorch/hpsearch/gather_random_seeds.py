@@ -34,30 +34,29 @@ output folder is recognized by the file ``config.pickle`` which contains the
 output folder (cf. :mod:`hypnettorch.hpsearch.hpsearch`) is provided, the best
 run will be selected.
 
-**Example 1:** Assume you are in the simulation directory ``sims/my_sim`` and
-want to start the random seed gathering from there for a simulation in folder
-``sims/my_sim/out/example_run``. Note, we assume here that the base run in
-``sims/my_sim/out/example_run`` finished successfully and can already be used
+**Example 1:** Assume you are in the simulation directory and want to start the
+random seed gathering from there for a simulation in folder
+``./out/example_run``. Note, we assume here that the base run in
+``./out/example_run`` finished successfully and can already be used
 as 1 random seed.
 
 .. code-block:: console
 
-   $ TMP_CUR_DIR="$(pwd -P)" && pushd ../../hpsearch && python3 \
-gather_random_seeds.py --grid_module=sims.my_sim.hpsearch_config \
---run_dir=../psims/my_sim/out/example_run --num_seeds=10 | tee /dev/tty | \
-awk 'END{print}' | xargs bash -c 'echo --grid_module=$0 --grid_config=$1 \
---force_out_dir --dont_force_new_dir --out_dir=$2' | xargs python3 hpsearch.py \
---run_cwd=$TMP_CUR_DIR && popd
+   $ python -m hypnettorch.hpsearch.gather_random_seeds \
+--grid_module=my_hpsearch_config --run_dir=./out/example_run --num_seeds=10 | \
+tee /dev/tty | awk 'END{print}' | \
+xargs bash -c 'echo --grid_module=$0 --grid_config=$1 --force_out_dir \
+--dont_force_new_dir --out_dir=$2' | \
+xargs python -m hypnettorch.hpsearch.hpsearch
 
 **Example 2:** Alternatively, the hpsearch can be started directly via the
 option ``--start_gathering``.
 
 .. code-block:: console
 
-   $ TMP_CUR_DIR="$(pwd -P)" && pushd ../../hpsearch && python3 \
-gather_random_seeds.py --grid_module=sims.my_sim.hpsearch_config \
---run_dir=../psims/my_sim/out/example_run --num_seeds=4 --start_gathering \
---config_name=example_run_seed_gathering --run_cwd=$TMP_CUR_DIR && popd
+   $ python -m hypnettorch.hpsearch.gather_random_seeds \
+--grid_module=my_hpsearch_config --run_dir=./out/example_run --num_seeds=4 \
+--start_gathering --config_name=example_run_seed_gathering
 
 **Example 3:** An example instantiation of this script can be found in module
 `probabilistic.regression.gather_seeds_bbb <https://git.io/J9quN>`__.
