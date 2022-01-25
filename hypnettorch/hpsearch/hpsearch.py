@@ -1228,7 +1228,7 @@ def run(argv=None, dout_dir='./out/hyperparam_search'):
     for cmd in commands:
         print(_args_to_cmd_str(cmd))
     print('\nThe %d command(s) above will be executed.' % len(commands))
-    _CMD_FINISHED = [False] * len(commands)
+    globals()['_CMD_FINISHED'] = [False] * len(commands)
 
     ### Assign an output directory to each command.
     # We do this after the shuffling to make sure the folder are displayed in
