@@ -71,9 +71,9 @@ class ChunkedHMLP(nn.Module, HyperNetInterface):
         (....): See constructor arguments of class
             :class:`hnets.mlp_hnet.HMLP`.
         chunk_size (int): The chunk size, i.e, the number of weights produced by
-            single the internally maintained instance of a full hypernet
-            (see :class:`hnets.mlp_hnet.HMLP`) at a time (i.e., per chunk
-            embedding).
+            individual forward passes of the internally maintained instance of a
+            full hypernet (see :class:`hnets.mlp_hnet.HMLP`) upon receiving a
+            chunk embedding).
         chunk_emb_size (int): The size of a chunk embedding.
         cond_chunk_embs (bool): Whether chunk embeddings are unconditional
             (``False``) or conditional (``True``) parameters. See constructor
