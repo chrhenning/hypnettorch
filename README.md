@@ -84,12 +84,12 @@ and opened via the file [index.html](docs/html/index.html).
 When using this package in your research project, please consider citing one of our papers for which this package has been developed.
 
 ```
-@inproceedings{oshg2019hypercl,
-title={Continual learning with hypernetworks},
-author={Johannes von Oswald and Christian Henning and Jo{\~a}o Sacramento and Benjamin F. Grewe},
-booktitle={International Conference on Learning Representations},
-year={2020},
-url={https://arxiv.org/abs/1906.00695}
+@inproceedings{posterior:replay:2021:henning:cervera,
+title={Posterior Meta-Replay for Continual Learning}, 
+      author={Christian Henning and Maria R. Cervera and Francesco D'Angelo and Johannes von Oswald and Regina Traber and Benjamin Ehret and Seijin Kobayashi and Benjamin F. Grewe and João Sacramento},
+booktitle={Conference on Neural Information Processing Systems},
+year={2021},
+url={https://arxiv.org/abs/2103.01133}
 }
 ```
 
@@ -104,11 +104,11 @@ url={https://arxiv.org/abs/1906.00695}
 ```
 
 ```
-@inproceedings{posterior:replay:2021:henning:cervera,
-title={Posterior Meta-Replay for Continual Learning}, 
-      author={Christian Henning and Maria R. Cervera and Francesco D'Angelo and Johannes von Oswald and Regina Traber and Benjamin Ehret and Seijin Kobayashi and Benjamin F. Grewe and João Sacramento},
-booktitle={Conference on Neural Information Processing Systems},
-year={2021},
-url={https://arxiv.org/abs/2103.01133}
+@inproceedings{oshg2019hypercl,
+title={Continual learning with hypernetworks},
+author={Johannes von Oswald and Christian Henning and Benjamin F. Grewe and Jo{\~a}o Sacramento},
+booktitle={International Conference on Learning Representations},
+year={2020},
+url={https://arxiv.org/abs/1906.00695}
 }
 ```
