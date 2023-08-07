@@ -252,12 +252,8 @@ class SelfAttnLayerV2(nn.Module):
 
         if dWeights is not None:
             assert(len(dWeights) == len(self.weight_shapes))
-
-            new_weights = []
-            for i, w in enumerate(weights):
-                new_weights.append(w + dWeights[i])
-            weights = new_weights
-
+            weights = np.add(weights,dWeights)
+            
         m_batchsize, C, width, height = x.size()
 
         # Compute f(x)^T, shape: B x N x C//8.
